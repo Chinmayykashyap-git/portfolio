@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chinmay Kashyap — Curriculum Vitae</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f2ebdd;
+    --paper-deep: #e9dfcb;
+    --card: #f9f5ea;
+    --ink: #2b1416;
+    --ink-soft: #4a3430;
+    --oxblood: #6e131a;
+    --maroon: #7c1c22;
+    --blood: #8c1015;
+    --ember: #9c2b26;
+    --gold: #86611f;
+    --gold-dim: #a9895a;
+    --bone: #2b1416;
+    --bone-dim: #4a3430;
+    --hair: rgba(42,20,22,0.18);
+    --shadow: rgba(42,20,22,0.18);
+    --dark-card: #1c0d0d;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(124,28,34,0.10), transparent 55%),
+      var(--paper);
+    color: var(--ink-soft);
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection{ background: var(--oxblood); color: var(--paper); }
+
+  a{ color: inherit; text-decoration:none; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index: 999;
+    opacity:0.035; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .vignette{
+    position:fixed; inset:0; pointer-events:none; z-index: 998;
+    box-shadow: inset 0 0 220px rgba(42,20,22,0.10);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:500;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 22px 6vw;
+    background: linear-gradient(to bottom, rgba(242,235,221,0.96), rgba(242,235,221,0));
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  nav .mark{ color: var(--ink); font-family:'Cormorant Garamond', serif; font-size:16px; letter-spacing:0.14em; }
+  nav .mark b{ color: var(--ember); font-weight:600; }
+  nav ul{ list-style:none; display:flex; gap: 32px; }
+  nav a{ position:relative; padding-bottom:4px; transition: color .3s; }
+  nav a:hover{ color: var(--ink); }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background: var(--gold); transition: width .35s ease;
+  }
+  nav a:hover::after{ width:100%; }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; position:relative; padding: 140px 6vw 80px;
+  }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.35em;
+    text-transform:uppercase; color: var(--gold-dim); margin-bottom:28px;
+  }
+  .hero .eyebrow::before, .hero .eyebrow::after{ content:'—'; margin:0 12px; color: var(--maroon); }
+
+  .hero h1{
+    font-family:'Cormorant Garamond', serif; font-weight:600;
+    font-size: clamp(52px, 9vw, 118px);
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    line-height: 0.95;
+  }
+  .hero h1 em{ font-style:italic; color: var(--oxblood); font-weight:500; }
+
+  .hero .role-line{
+    margin-top: 26px; max-width: 780px;
+    font-family:'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing:0.06em;
+    color: var(--ink-soft); line-height:2;
+  }
+  .hero .role-line .sep{ color: var(--maroon); margin: 0 10px; }
+
+  .hero .credential{
+    margin-top: 34px; font-style:italic; font-size:16.5px; color: var(--oxblood);
+    max-width: 620px; letter-spacing:0.02em;
+  }
+
+  /* Business card (kept dark on purpose: real card stock against ivory paper) */
+  .card-stage{
+    margin-top: 64px; perspective: 1600px; width: 380px; max-width: 86vw; height: 232px;
+  }
+  .card{
+    width:100%; height:100%; position:relative; transform-style: preserve-3d;
+    transition: transform 0.15s ease-out;
+    cursor: pointer;
+  }
+  .card.flipped{ transform: rotateY(180deg); }
+  .card-face{
+    position:absolute; inset:0; border-radius: 3px;
+    backface-visibility:hidden;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    border:1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 24px 50px -18px rgba(42,20,22,0.35), 0 0 0 1px rgba(166,124,61,0.10);
+  }
+  .card-front{
+    background:
+      linear-gradient(155deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 30%),
+      linear-gradient(135deg, #2a1414 0%, #200e0e 60%, #170a0a 100%);
+  }
+  .card-front .cf-name{
+    font-family:'Cormorant Garamond', serif; font-size:30px; letter-spacing:0.06em;
+    color: var(--paper); font-weight:600;
+  }
+  .card-front .cf-title{
+    font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.28em;
+    text-transform:uppercase; color: var(--gold-dim); margin-top:10px;
+  }
+  .card-front .cf-rule{ width:46px; height:1px; background: var(--maroon); margin:18px 0; }
+  .card-front .cf-hint{
+    font-family:'IBM Plex Mono', monospace; font-size:8.5px; letter-spacing:0.18em;
+    text-transform:uppercase; color: rgba(242,235,221,0.5);
+  }
+  .card-back{
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #170a0a 0%, #241010 100%);
+    align-items:flex-start; padding: 34px 38px; text-align:left; gap:10px;
+  }
+  .card-back .cb-row{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color: rgba(242,235,221,0.75); letter-spacing:0.02em; }
+  .card-back .cb-row b{ color: var(--gold-dim); font-weight:500; margin-right:8px; }
+  .card-sheen{
+    position:absolute; inset:0; pointer-events:none;
+    background: linear-gradient(115deg, transparent 30%, rgba(166,124,61,0.20) 48%, transparent 66%);
+    background-size: 260% 260%;
+    background-position: 120% 0%;
+    transition: background-position 0.9s ease;
+    mix-blend-mode: screen;
+  }
+  .card:hover .card-sheen{ background-position: -20% 100%; }
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;
+    color: var(--ink-soft); opacity:0.6; display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue .line{ width:1px; height:34px; background: linear-gradient(to bottom, var(--gold), transparent); animation: drop 2.2s ease-in-out infinite; }
+  @keyframes drop{ 0%{opacity:0; transform:scaleY(0.3);} 50%{opacity:1;} 100%{opacity:0; transform:scaleY(1);} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ position:relative; padding: 140px 6vw; max-width:1180px; margin:0 auto; }
+  .section-head{ margin-bottom: 64px; }
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.3em; color:var(--maroon);
+  }
+  .section-head h2{
+    font-family:'Cormorant Garamond', serif; font-weight:600; font-size: clamp(34px, 4.5vw, 54px);
+    color: var(--ink); margin-top:10px; display:flex; align-items:baseline; gap:18px;
+  }
+  .section-head h2 .rule{ flex:1; height:1px; background: var(--hair); transform: translateY(-10px); }
+
+  /* ---------- DOSSIER (about) ---------- */
+  .dossier{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:70px; align-items:start; }
+  .dossier p{ font-size:19px; color: var(--ink-soft); margin-bottom:22px; }
+  .dossier p b{ color:var(--ink); font-weight:600; }
+  .stamp{
+    border:1px solid var(--hair); padding: 26px 28px; position:relative;
+    background: linear-gradient(160deg, rgba(124,28,34,0.05), var(--card));
+  }
+  .stamp::before{
+    content:'CONFIDENTIAL'; position:absolute; top:14px; right:16px;
+    font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.25em; color: rgba(140,16,21,0.45);
+  }
+  .stamp h4{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+  .stamp .field{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--hair); font-size:15px; }
+  .stamp .field:last-child{ border-bottom:none; }
+  .stamp .field span:first-child{ color: var(--ink-soft); }
+  .stamp .field span:last-child{ color: var(--ink); text-align:right; font-weight:600; }
+
+  /* ---------- LEDGER (experience) ---------- */
+  .ledger{ position:relative; }
+  .ledger::before{ content:''; position:absolute; left:130px; top:6px; bottom:6px; width:1px; background: var(--hair); }
+  .entry{ display:grid; grid-template-columns: 130px 1fr; gap:36px; padding: 34px 0; border-bottom:1px solid var(--hair); position:relative; }
+  .entry:first-child{ padding-top:0; }
+  .entry::before{
+    content:''; position:absolute; left:126px; top:40px; width:9px; height:9px; border-radius:50%;
+    background: var(--paper); border:1.5px solid var(--maroon); z-index:2;
+  }
+  .entry .when{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color: var(--gold); padding-top:2px; font-weight:500; }
+  .entry h3{ font-family:'Cormorant Garamond', serif; font-size:26px; color: var(--ink); font-weight:600; }
+  .entry .org{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; color: var(--oxblood); margin: 6px 0 14px; text-transform:uppercase; }
+  .entry p{ font-size:16.5px; color: var(--ink-soft); max-width:680px; }
+
+  /* ---------- CASE FILES (projects) ---------- */
+  .files{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--hair); border:1px solid var(--hair); }
+  .file{
+    background: var(--card); padding: 40px; position:relative; overflow:hidden;
+    transition: background .4s ease;
+  }
+  .file:hover{ background: var(--paper-deep); }
+  .file .file-no{ font-family:'IBM Plex Mono', monospace; font-size:11px; color: var(--maroon); letter-spacing:0.2em; }
+  .file h3{ font-family:'Cormorant Garamond', serif; font-size:27px; color:var(--ink); margin:14px 0 16px; font-weight:600; }
+  .file p{ font-size:15.5px; color: var(--ink-soft); margin-bottom:20px; }
+  .file .stack{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
+  .file .stack span{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.05em; color: var(--gold);
+    border:1px solid rgba(134,97,31,0.35); padding:4px 9px; border-radius:2px; text-transform:uppercase;
+  }
+  .file a.link{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; color: var(--ink);
+    display:inline-flex; align-items:center; gap:8px; border-bottom:1px solid var(--maroon); padding-bottom:3px;
+    transition: color .3s, border-color .3s;
+  }
+  .file a.link:hover{ color: var(--oxblood); border-color: var(--oxblood); }
+  .file .seal{
+    position:absolute; right:-30px; top:-30px; width:110px; height:110px; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, var(--maroon), var(--oxblood) 60%, transparent 75%);
+    opacity:0.14; filter: blur(2px);
+  }
+
+  /* ---------- SKILLS LEDGER ---------- */
+  .skill-ledger{ border-top:1px solid var(--hair); }
+  .skill-row{ display:grid; grid-template-columns: 220px 1fr; gap:40px; padding:26px 0; border-bottom:1px solid var(--hair); align-items:baseline; }
+  .skill-row .cat{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.15em; text-transform:uppercase; color: var(--gold); }
+  .skill-row .items{ font-size:16.5px; color: var(--ink-soft); line-height:1.9; }
+  .skill-row .items b{ color: var(--ink); font-weight:600; }
+
+  /* ---------- CREDENTIALS ---------- */
+  .credentials-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:1px; background: var(--hair); border:1px solid var(--hair); }
+  .cred{ background: var(--card); padding: 28px 30px; font-size:15.5px; color: var(--ink-soft); display:flex; align-items:flex-start; gap:14px; }
+  .cred .glyph{ color: var(--maroon); font-family:'Cormorant Garamond', serif; font-size:22px; font-style:italic; line-height:1; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    padding: 130px 6vw 60px; text-align:center; position:relative;
+    background: radial-gradient(ellipse at 50% 100%, rgba(124,28,34,0.08), transparent 60%);
+  }
+  footer .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.3em; color: var(--gold-dim); text-transform:uppercase; }
+  footer h2{
+    font-family:'Cormorant Garamond', serif; font-size: clamp(38px, 6vw, 68px); color: var(--ink); margin: 20px 0 40px; font-weight:600;
+  }
+  footer h2 em{ color: var(--oxblood); font-style:italic; }
+  .contact-row{ display:flex; justify-content:center; gap:0; flex-wrap:wrap; font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.08em; }
+  .contact-row a{
+    padding: 14px 26px; border:1px solid var(--hair); position:relative; transition: color .3s, border-color .3s, background .3s;
+    color: var(--ink-soft);
+  }
+  .contact-row a:hover{ color: var(--ink); border-color: var(--gold-dim); background: var(--card); }
+  footer .fine{
+    margin-top:70px; font-size:11px; letter-spacing:0.15em; color: rgba(42,20,22,0.4);
+    font-family:'IBM Plex Mono', monospace; text-transform:uppercase;
+  }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (max-width: 860px){
+    nav ul{ display:none; }
+    .dossier{ grid-template-columns: 1fr; }
+    .files{ grid-template-columns: 1fr; }
+    .entry{ grid-template-columns: 90px 1fr; gap:20px; }
+    .ledger::before{ left:86px; }
+    .entry::before{ left:82px; }
+    .skill-row{ grid-template-columns: 1fr; gap:10px; }
+    section{ padding:100px 7vw; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<nav>
+  <div class="mark">C<b>K</b> — DOSSIER</div>
+  <ul>
+    <li><a href="#dossier">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Jaipur, India</div>
+  <h1>Chinmay <em>Kashyap</em></h1>
+  <div class="role-line">
+    Software Engineering <span class="sep">/</span> Cloud Computing <span class="sep">/</span> Machine Learning <span class="sep">/</span> Financial Risk Modeling <span class="sep">/</span> LLM &amp; RAG Systems
+  </div>
+  <div class="credential">Patent-pending method for transaction-system risk optimization. Research paper on financial risk modeling, currently under review.</div>
+
+  <div class="card-stage">
+    <div class="card" id="bizcard">
+      <div class="card-face card-front">
+        <div class="card-sheen"></div>
+        <div class="cf-name">Chinmay Kashyap</div>
+        <div class="cf-title">ML &amp; Cloud Engineer</div>
+        <div class="cf-rule"></div>
+        <div class="cf-hint">Click to turn the card over</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-sheen"></div>
+        <div class="cb-row"><b>Mail</b>wrkchinmay@gmail.com</div>
+        <div class="cb-row"><b>LinkedIn</b>/in/chinmaykashyap-216108307</div>
+        <div class="cb-row"><b>GitHub</b>/chinmaykashyap</div>
+        <div class="cb-row"><b>Based</b>Jaipur, India</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><div class="line"></div>SCROLL</div>
+</section>
+
+<section id="dossier">
+  <div class="section-head reveal">
+    <div class="num">01 — SUBJECT FILE</div>
+    <h2>Dossier<span class="rule"></span></h2>
+  </div>
+  <div class="dossier">
+    <div class="reveal">
+      <p><b>ML Engineer</b> with experience spanning AWS and GCP, retrieval-augmented LLM applications, financial risk classifiers, and end-to-end machine learning pipelines. Currently a Software Engineering Intern at ServiceNow, and a recognised Open-Source Contributor for GSSoC 2026 across ML and cloud repositories.</p>
+      <p>Seeking a research internship to extend applied financial-risk work into rigorous ML research — the same methodology underlying a filed patent and a paper currently under review.</p>
+      <p><b>B.Tech, Computer &amp; Communication Engineering</b> — Manipal University Jaipur, Aug 2024 – Jul 2028. Coursework across Data Structures, Algorithms, OOP, Cloud Computing, Linear Algebra, Probability &amp; Statistics, Optimization, Machine Learning, and Deep Learning.</p>
+    </div>
+    <div class="stamp reveal">
+      <h4>Research Record</h4>
+      <div class="field"><span>Patent</span><span>Filed / Pending</span></div>
+      <div class="field"><span>Subject</span><span>Transaction Risk Optimization</span></div>
+      <div class="field"><span>Paper</span><span>Under Review</span></div>
+      <div class="field"><span>Title</span><span>Financial Risk Modeling &amp; Transaction System Design</span></div>
+      <div class="field"><span>Status</span><span>Active</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-head reveal">
+    <div class="num">02 — RECORD OF EMPLOYMENT</div>
+    <h2>Experience<span class="rule"></span></h2>
+  </div>
+  <div class="ledger">
+
+    <div class="entry reveal">
+      <div class="when">Apr 2026<br>— Present</div>
+      <div>
+        <h3>Software Engineering Intern</h3>
+        <div class="org">ServiceNow</div>
+        <p>Developed workflow automation solutions using JavaScript and REST APIs within the enterprise SDLC, improving process efficiency and reducing manual intervention across enterprise workflows. Earned first achievement badge in Week 1.</p>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="when">Jan 2026<br>— Feb 2026</div>
+      <div>
+        <h3>AI &amp; Cloud Computing Trainee</h3>
+        <div class="org">Amazon Web Services</div>
+        <p>Built generative AI applications using AWS Bedrock, SageMaker, and Lambda. Implemented end-to-end ML inference pipelines covering deployment, autoscaling, and cost optimization. Published technical content on AWS Builder Center.</p>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="when">Dec 2025<br>— Jan 2026</div>
+      <div>
+        <h3>Cloud Facilitator</h3>
+        <div class="org">Google Cloud Community India</div>
+        <p>Built a production-grade Document AI pipeline on GCP with full CI/CD via Cloud Build, Artifact Registry, and Cloud Deploy. Deployed and managed Kubernetes clusters on GKE, earning GKE and CI/CD skill badges.</p>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="when">May 2025<br>— Jul 2025</div>
+      <div>
+        <h3>Trainee, Forward Program</h3>
+        <div class="org">McKinsey &amp; Company</div>
+        <p>Developed structured problem-solving frameworks and strategic thinking applied to technology and business contexts.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-head reveal">
+    <div class="num">03 — CASE FILES</div>
+    <h2>Projects<span class="rule"></span></h2>
+  </div>
+  <div class="files reveal">
+
+    <div class="file">
+      <div class="seal"></div>
+      <div class="file-no">FILE No. 01</div>
+      <h3>Financial Risk Intelligence System</h3>
+      <p>An end-to-end ML pipeline predicting corporate financial risk from revenue, profit margin, debt ratio, current ratio, and cash flow. A Random Forest Classifier reaches ~94% accuracy with explainable, feature-importance-based predictions — the methodology underlying the current patent and paperwork on transaction risk systems.</p>
+      <div class="stack"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Matplotlib</span></div>
+      <a class="link" href="https://github.com/Chinmayykashyap-git/financial-risk-intelligence-system" target="_blank" rel="noopener">View Repository →</a>
+    </div>
+
+    <div class="file">
+      <div class="seal"></div>
+      <div class="file-no">FILE No. 02</div>
+      <h3>FinSight Risk Engine</h3>
+      <p>A classification model predicting corporate bankruptcy risk from financial statement features, evaluated via accuracy, precision/recall, and ROC-AUC, with feature importance analysis for interpretability.</p>
+      <div class="stack"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>Matplotlib</span></div>
+      <a class="link" href="https://github.com/Chinmayykashyap-git/FinSight-Risk-Engine" target="_blank" rel="noopener">View Repository →</a>
+    </div>
+
+    <div class="file">
+      <div class="seal"></div>
+      <div class="file-no">FILE No. 03</div>
+      <h3>Vertex AI Financial Analyst Assistant</h3>
+      <p>A production-ready, LLM-powered financial analyst assistant using retrieval-augmented generation for domain-specific financial queries, with real-time grounding across the ingestion, embedding, and inference pipeline.</p>
+      <div class="stack"><span>Python</span><span>Vertex AI</span><span>GCP</span><span>RAG</span></div>
+      <a class="link" href="#contact">Request Details →</a>
+    </div>
+
+    <div class="file">
+      <div class="seal"></div>
+      <div class="file-no">FILE No. 04</div>
+      <h3>GKE CI/CD Automation Pipeline</h3>
+      <p>A fully automated CI/CD system that builds, tests, containerizes, and deploys microservices to GKE with zero-downtime rolling updates.</p>
+      <div class="stack"><span>Cloud Build</span><span>GKE</span><span>Kubernetes</span><span>Cloud Deploy</span></div>
+      <a class="link" href="#contact">Request Details →</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="section-head reveal">
+    <div class="num">04 — INVENTORY</div>
+    <h2>Capabilities<span class="rule"></span></h2>
+  </div>
+  <div class="skill-ledger reveal">
+    <div class="skill-row">
+      <div class="cat">ML &amp; AI</div>
+      <div class="items"><b>PyTorch</b>, <b>TensorFlow</b>, Scikit-learn, Hugging Face, LLMs, Prompt Engineering, RAG, Vertex AI, Random Forest, Feature Engineering, Explainable AI</div>
+    </div>
+    <div class="skill-row">
+      <div class="cat">Cloud &amp; DevOps</div>
+      <div class="items"><b>AWS</b> (SageMaker, Bedrock, Lambda), <b>GCP</b> (GKE, Cloud Run, Cloud Build, Document AI), Docker, Kubernetes, CI/CD, Cloud Deploy, Artifact Registry, IAM</div>
+    </div>
+    <div class="skill-row">
+      <div class="cat">Languages &amp; Tools</div>
+      <div class="items">Python, Java, C, C++, C#, JavaScript, SQL, Bash, REST APIs, ServiceNow, Pandas, NumPy, Matplotlib, Google Colab, Git</div>
+    </div>
+    <div class="skill-row">
+      <div class="cat">Development</div>
+      <div class="items">SDLC, Agile / Scrum, CI/CD, Version Control, Unit Testing, Code Review</div>
+    </div>
+  </div>
+
+  <div style="margin-top:70px;" class="reveal">
+    <div class="section-head" style="margin-bottom:36px;">
+      <div class="num">05 — CERTIFICATIONS &amp; ACHIEVEMENTS</div>
+    </div>
+    <div class="credentials-grid">
+      <div class="cred"><span class="glyph">§</span>Kaggle Python Coder Badge</div>
+      <div class="cred"><span class="glyph">§</span>Google Cloud Skill Badges — GKE, CI/CD, Data for ML APIs</div>
+      <div class="cred"><span class="glyph">§</span>Deloitte Australia Job Simulation, Forage</div>
+      <div class="cred"><span class="glyph">§</span>IIT Bombay Robotics Workshop</div>
+      <div class="cred"><span class="glyph">§</span>Model UN Delegate</div>
+      <div class="cred"><span class="glyph">§</span>GSSoC 2026 Open-Source Contributor — ML &amp; Cloud Repositories</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="eyebrow">06 — Correspondence</div>
+  <h2>Let's <em>talk</em> business.</h2>
+  <div class="contact-row">
+    <a href="mailto:wrkchinmay@gmail.com">wrkchinmay@gmail.com</a>
+    <a href="https://linkedin.com/in/chinmaykashyap-216108307" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/chinmaykashyap" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="fine">Chinmay Kashyap — Jaipur, India — All figures on this page are audited and current</div>
+</footer>
+
+<script>
+  // business card flip
+  const card = document.getElementById('bizcard');
+  const stage = card.closest('.card-stage');
+  let flipped = false;
+  card.addEventListener('click', () => {
+    flipped = !flipped;
+    card.classList.toggle('flipped', flipped);
+  });
+  stage.addEventListener('mousemove', (e) => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    const ry = flipped ? 180 - x * 14 : x * 14;
+    card.style.transform = `rotateY(${ry}deg) rotateX(${ -y * 10 }deg)`;
+  });
+  stage.addEventListener('mouseleave', () => {
+    card.style.transform = flipped ? 'rotateY(180deg)' : '';
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
